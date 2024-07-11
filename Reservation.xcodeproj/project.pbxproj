@@ -8,12 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		118ACA392C4042C400428AA8 /* ReservationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA382C4042C400428AA8 /* ReservationApp.swift */; };
-		118ACA3B2C4042C400428AA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA3A2C4042C400428AA8 /* ContentView.swift */; };
+		118ACA3B2C4042C400428AA8 /* ClientSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */; };
 		118ACA3D2C4042C600428AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118ACA3C2C4042C600428AA8 /* Assets.xcassets */; };
 		118ACA412C4042C600428AA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118ACA402C4042C600428AA8 /* Preview Assets.xcassets */; };
 		118ACA4B2C4042C700428AA8 /* ReservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA4A2C4042C700428AA8 /* ReservationTests.swift */; };
 		118ACA552C4042C700428AA8 /* ReservationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA542C4042C700428AA8 /* ReservationUITests.swift */; };
 		118ACA572C4042C700428AA8 /* ReservationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA562C4042C700428AA8 /* ReservationUITestsLaunchTests.swift */; };
+		118ACA642C40435000428AA8 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA632C40435000428AA8 /* DataModels.swift */; };
+		118ACA662C40447700428AA8 /* ProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA652C40447700428AA8 /* ProviderViewModel.swift */; };
+		118ACA682C40448400428AA8 /* ClientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA672C40448400428AA8 /* ClientViewModel.swift */; };
+		118ACA6A2C4048C700428AA8 /* ProviderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA692C4048C700428AA8 /* ProviderDetailView.swift */; };
+		118ACA6F2C404D6B00428AA8 /* ProviderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA6E2C404D6B00428AA8 /* ProviderListView.swift */; };
+		118ACA712C40510500428AA8 /* ReservationConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */; };
+		118ACA732C4054BD00428AA8 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA722C4054BD00428AA8 /* Extension+Date.swift */; };
+		118ACA752C4055C000428AA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA742C4055C000428AA8 /* ContentView.swift */; };
+		118ACA772C40595E00428AA8 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA762C40595E00428AA8 /* BannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +45,7 @@
 /* Begin PBXFileReference section */
 		118ACA352C4042C300428AA8 /* Reservation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reservation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118ACA382C4042C400428AA8 /* ReservationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationApp.swift; sourceTree = "<group>"; };
-		118ACA3A2C4042C400428AA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSelectionView.swift; sourceTree = "<group>"; };
 		118ACA3C2C4042C600428AA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		118ACA3E2C4042C600428AA8 /* Reservation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reservation.entitlements; sourceTree = "<group>"; };
 		118ACA402C4042C600428AA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -45,6 +54,15 @@
 		118ACA502C4042C700428AA8 /* ReservationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReservationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		118ACA542C4042C700428AA8 /* ReservationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUITests.swift; sourceTree = "<group>"; };
 		118ACA562C4042C700428AA8 /* ReservationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		118ACA632C40435000428AA8 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		118ACA652C40447700428AA8 /* ProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewModel.swift; sourceTree = "<group>"; };
+		118ACA672C40448400428AA8 /* ClientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewModel.swift; sourceTree = "<group>"; };
+		118ACA692C4048C700428AA8 /* ProviderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailView.swift; sourceTree = "<group>"; };
+		118ACA6E2C404D6B00428AA8 /* ProviderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderListView.swift; sourceTree = "<group>"; };
+		118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationView.swift; sourceTree = "<group>"; };
+		118ACA722C4054BD00428AA8 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		118ACA742C4055C000428AA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		118ACA762C40595E00428AA8 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				118ACA382C4042C400428AA8 /* ReservationApp.swift */,
-				118ACA3A2C4042C400428AA8 /* ContentView.swift */,
+				118ACA722C4054BD00428AA8 /* Extension+Date.swift */,
+				118ACA6B2C40494E00428AA8 /* Views */,
+				118ACA6D2C40498600428AA8 /* Data */,
+				118ACA6C2C40496400428AA8 /* ViewModels */,
 				118ACA3C2C4042C600428AA8 /* Assets.xcassets */,
 				118ACA3E2C4042C600428AA8 /* Reservation.entitlements */,
 				118ACA3F2C4042C600428AA8 /* Preview Content */,
@@ -127,6 +148,36 @@
 				118ACA562C4042C700428AA8 /* ReservationUITestsLaunchTests.swift */,
 			);
 			path = ReservationUITests;
+			sourceTree = "<group>";
+		};
+		118ACA6B2C40494E00428AA8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */,
+				118ACA742C4055C000428AA8 /* ContentView.swift */,
+				118ACA762C40595E00428AA8 /* BannerView.swift */,
+				118ACA692C4048C700428AA8 /* ProviderDetailView.swift */,
+				118ACA6E2C404D6B00428AA8 /* ProviderListView.swift */,
+				118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		118ACA6C2C40496400428AA8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				118ACA652C40447700428AA8 /* ProviderViewModel.swift */,
+				118ACA672C40448400428AA8 /* ClientViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		118ACA6D2C40498600428AA8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				118ACA632C40435000428AA8 /* DataModels.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +310,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				118ACA3B2C4042C400428AA8 /* ContentView.swift in Sources */,
+				118ACA6A2C4048C700428AA8 /* ProviderDetailView.swift in Sources */,
+				118ACA642C40435000428AA8 /* DataModels.swift in Sources */,
+				118ACA662C40447700428AA8 /* ProviderViewModel.swift in Sources */,
+				118ACA732C4054BD00428AA8 /* Extension+Date.swift in Sources */,
+				118ACA682C40448400428AA8 /* ClientViewModel.swift in Sources */,
+				118ACA3B2C4042C400428AA8 /* ClientSelectionView.swift in Sources */,
+				118ACA752C4055C000428AA8 /* ContentView.swift in Sources */,
+				118ACA772C40595E00428AA8 /* BannerView.swift in Sources */,
 				118ACA392C4042C400428AA8 /* ReservationApp.swift in Sources */,
+				118ACA712C40510500428AA8 /* ReservationConfirmationView.swift in Sources */,
+				118ACA6F2C404D6B00428AA8 /* ProviderListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
