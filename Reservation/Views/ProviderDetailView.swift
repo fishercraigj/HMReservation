@@ -26,9 +26,14 @@ struct ProviderDetailView: View {
                             if slot.isReserved {
                                 Text("Reserved")
                             } else {
-                                Button("Reserve") {
-                                    selectedTimeSlot = slot
+                                let isAvailable = Calendar.current.date(byAdding: .hour, value: 24, to: Date())! <= slot.startTime
+                                Button(isAvailable ? "Reserve" : "Unavailable") {
+                                    if isAvailable {
+                                        selectedTimeSlot = slot
+                                    }
                                 }
+                                .disabled(!isAvailable)
+                                .foregroundColor(isAvailable ? .blue : .gray)
                             }
                         }
                     }
