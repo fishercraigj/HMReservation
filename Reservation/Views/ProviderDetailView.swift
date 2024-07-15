@@ -82,10 +82,12 @@ struct ProviderDetailView: View {
         }
     }
 
+    /// Returns the confirmed time slots for the provider.
     private var confirmedSlots: [TimeSlot] {
         providerVM.providers.first(where: { $0.id == provider.id })?.schedule.filter { $0.isReserved } ?? []
     }
 
+    /// Groups the available time slots by date.
     private var groupedSlotsByDate: [String: [TimeSlot]] {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -95,6 +97,7 @@ struct ProviderDetailView: View {
         }
     }
 
+    /// Returns the date header string for a given date.
     private func dateHeader(for date: String) -> String {
         return date
     }

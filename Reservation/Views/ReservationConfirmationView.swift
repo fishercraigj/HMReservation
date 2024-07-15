@@ -73,6 +73,13 @@ struct ReservationConfirmationView: View {
             }
             .padding(.horizontal)
             .accessibility(label: Text("Confirm Reservation"))
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Reservation Confirmed"),
+                    message: Text("Your reservation with \(provider.name) has been confirmed."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
         .padding()
         .navigationTitle("")
