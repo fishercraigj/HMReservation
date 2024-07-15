@@ -42,6 +42,9 @@ struct ProviderDetailView: View {
                     }
                 )
             }
+            .onAppear {
+                selectedTimeSlot = nil
+            }
             .background(Color.clear)
         }
     }
