@@ -16,24 +16,33 @@ struct ProviderDetailView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .top) {
+            VStack {
+                Text("Note: Appointments can only be booked 24 hours in advance.")
+                    .font(.subheadline)
+                    .foregroundColor(.red)
+                    .padding(.bottom, 10)
+                
                 List {
-                    ForEach(providerVM.providers.first(where: { $0.id == provider.id })?.schedule ?? []) { slot in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
-                            }
-                            if slot.isReserved {
-                                Text("Reserved")
-                            } else {
-                                let isAvailable = Calendar.current.date(byAdding: .hour, value: 24, to: Date())! <= slot.startTime
-                                Button(isAvailable ? "Reserve" : "Unavailable") {
-                                    if isAvailable {
-                                        selectedTimeSlot = slot
+                    ForEach(groupedSlotsByDate.keys.sorted(), id: \.self) { date in
+                        Section(header: Text(dateHeader(for: date))) {
+                            ForEach(groupedSlotsByDate[date] ?? []) { slot in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
+                                    }
+                                    if slot.isReserved {
+                                        Text("Reserved")
+                                    } else {
+                                        let isAvailable = Calendar.current.date(byAdding: .hour, value: 24, to: Date())! <= slot.startTime
+                                        Button(isAvailable ? "Reserve" : "Unavailable") {
+                                            if isAvailable {
+                                                selectedTimeSlot = slot
+                                            }
+                                        }
+                                        .disabled(!isAvailable)
+                                        .foregroundColor(isAvailable ? .blue : .gray)
                                     }
                                 }
-                                .disabled(!isAvailable)
-                                .foregroundColor(isAvailable ? .blue : .gray)
                             }
                         }
                     }
@@ -52,6 +61,19 @@ struct ProviderDetailView: View {
             }
             .background(Color.clear)
         }
+    }
+
+    private var groupedSlotsByDate: [String: [TimeSlot]] {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        return Dictionary(grouping: providerVM.providers.first(where: { $0.id == provider.id })?.schedule ?? []) {
+            formatter.string(from: $0.startTime)
+        }
+    }
+
+    private func dateHeader(for date: String) -> String {
+        return date
     }
 }
 
