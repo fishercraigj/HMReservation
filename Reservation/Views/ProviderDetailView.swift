@@ -23,6 +23,19 @@ struct ProviderDetailView: View {
                     .padding(.bottom, 10)
                 
                 List {
+                    if !confirmedSlots.isEmpty {
+                        Section(header: Text("Confirmed Appointments")) {
+                            ForEach(confirmedSlots) { slot in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
+                                    }
+                                    Text("Reserved")
+                                }
+                            }
+                        }
+                    }
+                    
                     ForEach(groupedSlotsByDate.keys.sorted(), id: \.self) { date in
                         Section(header: Text(dateHeader(for: date))) {
                             ForEach(groupedSlotsByDate[date] ?? []) { slot in
@@ -63,11 +76,15 @@ struct ProviderDetailView: View {
         }
     }
 
+    private var confirmedSlots: [TimeSlot] {
+        providerVM.providers.first(where: { $0.id == provider.id })?.schedule.filter { $0.isReserved } ?? []
+    }
+
     private var groupedSlotsByDate: [String: [TimeSlot]] {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         formatter.timeStyle = .none
-        return Dictionary(grouping: providerVM.providers.first(where: { $0.id == provider.id })?.schedule ?? []) {
+        return Dictionary(grouping: providerVM.providers.first(where: { $0.id == provider.id })?.schedule.filter { !$0.isReserved } ?? []) {
             formatter.string(from: $0.startTime)
         }
     }
