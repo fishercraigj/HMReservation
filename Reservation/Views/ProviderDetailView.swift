@@ -57,17 +57,11 @@ struct ProviderDetailView: View {
 
 struct ProviderDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockProviders = [
-            Provider(id: UUID(), name: "Dr. Smith", schedule: [
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!, endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!),
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!, endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!)!)
-            ])
-        ]
         let clientVM = ClientViewModel()
         let providerVM = ProviderViewModel()
-        let client = Client(id: UUID(), name: "John Doe", reservations: [])
+        let provider = providerVM.providers.first!
+        let client = clientVM.clients.first!
 
-        ProviderDetailView(provider: mockProviders[0], clientVM: clientVM, providerVM: providerVM, selectedClient: client)
-            .environmentObject(clientVM)
+        ProviderDetailView(provider: provider, clientVM: clientVM, providerVM: providerVM, selectedClient: client)
     }
 }
