@@ -30,7 +30,9 @@ struct ProviderDetailView: View {
                                     VStack(alignment: .leading) {
                                         Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
                                     }
-                                    Text("Reserved")
+                                    Button("Cancel") {
+                                        providerVM.cancelReservation(providerID: provider.id, timeSlotID: slot.id)
+                                    }
                                 }
                             }
                         }

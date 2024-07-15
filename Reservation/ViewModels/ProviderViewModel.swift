@@ -65,4 +65,13 @@ class ProviderViewModel: ObservableObject {
 
         providers[providerIndex].schedule[slotIndex].isReserved = true
     }
+
+    func cancelReservation(providerID: UUID, timeSlotID: UUID) {
+        guard let providerIndex = providers.firstIndex(where: { $0.id == providerID }),
+              let slotIndex = providers[providerIndex].schedule.firstIndex(where: { $0.id == timeSlotID }) else {
+            return
+        }
+
+        providers[providerIndex].schedule[slotIndex].isReserved = false
+    }
 }
