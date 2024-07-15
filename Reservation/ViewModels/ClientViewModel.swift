@@ -17,15 +17,23 @@ class ClientViewModel: ObservableObject {
             Client(id: UUID(), name: "Jane Smith", reservations: []),
             Client(id: UUID(), name: "Alice Johnson", reservations: [])
         ]
+        
+        // Create a time slot for today
+        let todayStart = Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())!
+        let todayEnd = Calendar.current.date(byAdding: .minute, value: 15, to: todayStart)!
+        let todaySlot = TimeSlot(id: UUID(), startTime: todayStart, endTime: todayEnd)
+        
+        // Create time slots between 5 and 30 days out
+        var futureSlots: [TimeSlot] = []
+        for days in stride(from: 5, to: 30, by: 5) {
+            let start = Calendar.current.date(byAdding: .day, value: days, to: Date())!
+            let startTime = Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: start)!
+            let endTime = Calendar.current.date(byAdding: .minute, value: 15, to: startTime)!
+            futureSlots.append(TimeSlot(id: UUID(), startTime: startTime, endTime: endTime))
+        }
+
         self.providers = [
-            Provider(id: UUID(), name: "Dr. Smith", schedule: [
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .hour, value: 1, to: Date())!,
-                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .hour, value: 1, to: Date())!)!),
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .hour, value: 2, to: Date())!,
-                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .hour, value: 2, to: Date())!)!),
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .day, value: 30, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!,
-                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .day, value: 30, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!)!)
-            ])
+            Provider(id: UUID(), name: "Dr. Smith", schedule: [todaySlot] + futureSlots)
         ]
     }
 
