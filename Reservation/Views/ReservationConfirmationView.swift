@@ -17,38 +17,36 @@ struct ReservationConfirmationView: View {
 
     var body: some View {
         VStack {
+            Text("Confirm Reservation")
+                .font(.headline)
+                .padding()
+
             Text("Provider: \(provider.name)")
-            Text("Time Slot: \(timeSlot.startTime, formatter: DateFormatter.time) - \(timeSlot.endTime, formatter: DateFormatter.time)")
-            Button("Confirm Reservation") {
-                if let reservation = clientVM.clients.first(where: { $0.id == selectedClient.id })?.reservations.first(where: { $0.timeSlotID == timeSlot.id }) {
-                    clientVM.confirmReservation(clientID: selectedClient.id, reservationID: reservation.id, providers: &providerVM.providers)
-                    presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
-                }
+            Text("Client: \(selectedClient.name)")
+            Text("Date: \(timeSlot.startTime.customDateString())")
+            Text("Time: \(timeSlot.startTime.customTimeString()) - \(timeSlot.endTime.customTimeString()) \(timeSlot.startTime.timeZoneAbbreviation() ?? "")")
+
+            Button("Confirm") {
+                let reservationID = UUID() // Generate a new reservation ID
+                clientVM.confirmReservation(clientID: selectedClient.id, reservationID: reservationID, providers: &providerVM.providers)
+                providerVM.reserveTimeSlot(providerID: provider.id, timeSlotID: timeSlot.id)
+                presentationMode.wrappedValue.dismiss()
             }
+            .padding()
         }
-        .navigationTitle("Confirm Reservation")
-        .onAppear {
-            clientVM.checkExpiredReservations()
-        }
+        .navigationTitle("Reservation Confirmation")
+        .padding()
     }
 }
 
 struct ReservationConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockProviders = [
-            Provider(id: UUID(), name: "Dr. Smith", schedule: [
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!, endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!),
-                TimeSlot(id: UUID(), startTime: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!, endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!)!)
-            ])
-        ]
         let clientVM = ClientViewModel()
         let providerVM = ProviderViewModel()
-        let client = Client(id: UUID(), name: "John Doe", reservations: [])
-        let timeSlot = mockProviders[0].schedule[0]
+        let provider = providerVM.providers.first!
+        let client = clientVM.clients.first!
+        let timeSlot = provider.schedule.first!
 
-        NavigationStack {
-            ReservationConfirmationView(provider: mockProviders[0], timeSlot: timeSlot, selectedClient: client, clientVM: clientVM, providerVM: providerVM)
-                .environmentObject(clientVM)
-        }
+        ReservationConfirmationView(provider: provider, timeSlot: timeSlot, selectedClient: client, clientVM: clientVM, providerVM: providerVM)
     }
 }

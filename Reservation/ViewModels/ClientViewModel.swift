@@ -4,45 +4,79 @@
 //
 //  Created by Craig Fisher on 7/11/24.
 //
+
 import SwiftUI
 
 class ClientViewModel: ObservableObject {
-    @Published var clients: [Client] = mockClients
+    @Published var clients: [Client]
+    @Published var providers: [Provider] = []
 
-    func reserveTimeSlot(clientID: UUID, providerID: UUID, timeSlotID: UUID, providers: inout [Provider]) {
-        if let providerIndex = providers.firstIndex(where: { $0.id == providerID }),
-           let timeSlotIndex = providers[providerIndex].schedule.firstIndex(where: { $0.id == timeSlotID }) {
-            providers[providerIndex].schedule[timeSlotIndex].isReserved = true
+    init() {
+        self.clients = [
+            Client(id: UUID(), name: "John Doe", reservations: []),
+            Client(id: UUID(), name: "Jane Smith", reservations: []),
+            Client(id: UUID(), name: "Alice Johnson", reservations: [])
+        ]
+        self.providers = [
+            Provider(id: UUID(), name: "Dr. Smith", schedule: [
+                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .hour, value: 1, to: Date())!,
+                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .hour, value: 1, to: Date())!)!),
+                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .hour, value: 2, to: Date())!,
+                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .hour, value: 2, to: Date())!)!),
+                TimeSlot(id: UUID(), startTime: Calendar.current.date(byAdding: .day, value: 30, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!,
+                         endTime: Calendar.current.date(byAdding: .minute, value: 15, to: Calendar.current.date(byAdding: .day, value: 30, to: Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!)!)!)
+            ])
+        ]
+    }
 
-            let reservation = Reservation(id: UUID(), clientID: clientID, timeSlotID: timeSlotID, reservationTime: Date())
-            if let clientIndex = clients.firstIndex(where: { $0.id == clientID }) {
-                clients[clientIndex].reservations.append(reservation)
+    func reserveTimeSlot(clientID: UUID, providerID: UUID, timeSlotID: UUID, providers: inout [Provider]) -> Bool {
+        guard let clientIndex = clients.firstIndex(where: { $0.id == clientID }),
+              let providerIndex = providers.firstIndex(where: { $0.id == providerID }),
+              let timeSlotIndex = providers[providerIndex].schedule.firstIndex(where: { $0.id == timeSlotID }) else {
+            return false
+        }
+
+        let timeSlot = providers[providerIndex].schedule[timeSlotIndex]
+
+        // Check if the reservation is at least 24 hours in advance
+        if Calendar.current.date(byAdding: .hour, value: 24, to: Date())! > timeSlot.startTime {
+            return false
+        }
+
+        // Reserve the slot
+        let reservation = Reservation(id: UUID(), timeSlotID: timeSlotID, confirmed: false)
+        clients[clientIndex].reservations.append(reservation)
+        providers[providerIndex].schedule[timeSlotIndex].isReserved = true
+        return true
+    }
+
+    func confirmReservation(clientID: UUID, reservationID: UUID, providers: inout [Provider]) {
+        guard let clientIndex = clients.firstIndex(where: { $0.id == clientID }),
+              let reservationIndex = clients[clientIndex].reservations.firstIndex(where: { $0.id == reservationID }) else {
+            return
+        }
+
+        clients[clientIndex].reservations[reservationIndex].confirmed = true
+
+        // Update the provider's schedule to mark the slot as confirmed
+        let timeSlotID = clients[clientIndex].reservations[reservationIndex].timeSlotID
+        for providerIndex in 0..<providers.count {
+            if let slotIndex = providers[providerIndex].schedule.firstIndex(where: { $0.id == timeSlotID }) {
+                providers[providerIndex].schedule[slotIndex].isReserved = true
+                break
             }
         }
     }
 
-    func confirmReservation(clientID: UUID, reservationID: UUID, providers: inout [Provider]) {
-        if let clientIndex = clients.firstIndex(where: { $0.id == clientID }),
-           let reservationIndex = clients[clientIndex].reservations.firstIndex(where: { $0.id == reservationID }) {
-            clients[clientIndex].reservations[reservationIndex].isConfirmed = true
-            removeReservedSlot(providerID: clients[clientIndex].reservations[reservationIndex].timeSlotID, providers: &providers)
-        }
-    }
-
-    func removeReservedSlot(providerID: UUID, providers: inout [Provider]) {
-        if let providerIndex = providers.firstIndex(where: { $0.id == providerID }) {
-            providers[providerIndex].schedule.removeAll { $0.isReserved }
-        }
-    }
-
     func checkExpiredReservations() {
-        for client in clients {
-            for reservation in client.reservations {
-                if !reservation.isConfirmed && Date().timeIntervalSince(reservation.reservationTime) > 1800 {
-                    if let clientIndex = clients.firstIndex(where: { $0.id == client.id }),
-                       let reservationIndex = clients[clientIndex].reservations.firstIndex(where: { $0.id == reservation.id }) {
-                        clients[clientIndex].reservations.remove(at: reservationIndex)
-                    }
+        let now = Date()
+        for i in 0..<clients.count {
+            for j in (0..<clients[i].reservations.count).reversed() { // Iterate in reverse to remove expired reservations safely
+                if let timeSlot = providers.flatMap({ $0.schedule }).first(where: { $0.id == clients[i].reservations[j].timeSlotID }),
+                   !clients[i].reservations[j].confirmed,
+                   now > timeSlot.startTime.addingTimeInterval(-30 * 60) {
+                    // Reservation has expired
+                    clients[i].reservations.remove(at: j)
                 }
             }
         }

@@ -17,17 +17,18 @@ struct ProviderDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                List(provider.schedule) { slot in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
-                        }
-                        if slot.isReserved {
-                            Text("Reserved")
-                        } else {
-                            Button("Reserve") {
-                                clientVM.reserveTimeSlot(clientID: selectedClient.id, providerID: provider.id, timeSlotID: slot.id, providers: &providerVM.providers)
-                                selectedTimeSlot = slot
+                List {
+                    ForEach(providerVM.providers.first(where: { $0.id == provider.id })?.schedule ?? []) { slot in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
+                            }
+                            if slot.isReserved {
+                                Text("Reserved")
+                            } else {
+                                Button("Reserve") {
+                                    selectedTimeSlot = slot
+                                }
                             }
                         }
                     }
