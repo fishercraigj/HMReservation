@@ -16,9 +16,12 @@ struct ProviderListView: View {
         List(providerVM.providers) { provider in
             NavigationLink(destination: ProviderDetailView(provider: provider, clientVM: clientVM, providerVM: providerVM, selectedClient: selectedClient)) {
                 Text(provider.name)
+                    .accessibility(label: Text("Provider Name"))
+                    .accessibility(value: Text(provider.name))
             }
         }
         .navigationTitle("Select a Provider")
+        .accessibility(label: Text("Provider List"))
     }
 }
 

@@ -12,12 +12,17 @@ struct ClientSelectionView: View {
     @State private var selectedClient: Client?
 
     var body: some View {
-        List(clientVM.clients) { client in
-            NavigationLink(destination: ProviderListView(selectedClient: client)) {
-                Text(client.name)
+        NavigationStack {
+            List(clientVM.clients) { client in
+                NavigationLink(destination: ProviderListView(selectedClient: client)) {
+                    Text(client.name)
+                        .accessibility(label: Text("Client Name"))
+                        .accessibility(value: Text(client.name))
+                }
             }
+            .navigationTitle("Select a Client")
+            .accessibility(label: Text("Client List"))
         }
-        .navigationTitle("Select a Client")
     }
 }
 

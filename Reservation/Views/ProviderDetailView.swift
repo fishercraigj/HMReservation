@@ -21,6 +21,7 @@ struct ProviderDetailView: View {
                     .font(.subheadline)
                     .foregroundColor(.red)
                     .padding(.bottom, 10)
+                    .accessibility(label: Text("Appointments can only be booked 24 hours in advance."))
                 
                 List {
                     if !confirmedSlots.isEmpty {
@@ -33,6 +34,7 @@ struct ProviderDetailView: View {
                                     Button("Cancel") {
                                         providerVM.cancelReservation(providerID: provider.id, timeSlotID: slot.id)
                                     }
+                                    .accessibility(label: Text("Cancel Appointment"))
                                 }
                             }
                         }
@@ -47,6 +49,7 @@ struct ProviderDetailView: View {
                                     }
                                     if slot.isReserved {
                                         Text("Reserved")
+                                            .accessibility(label: Text("Reserved"))
                                     } else {
                                         let isAvailable = Calendar.current.date(byAdding: .hour, value: 24, to: Date())! <= slot.startTime
                                         Button(isAvailable ? "Reserve" : "Unavailable") {
@@ -56,6 +59,7 @@ struct ProviderDetailView: View {
                                         }
                                         .disabled(!isAvailable)
                                         .foregroundColor(isAvailable ? .blue : .gray)
+                                        .accessibility(label: Text(isAvailable ? "Reserve" : "Unavailable"))
                                     }
                                 }
                             }
