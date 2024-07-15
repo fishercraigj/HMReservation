@@ -13,14 +13,15 @@ struct ProviderDetailView: View {
     @ObservedObject var providerVM: ProviderViewModel
     var selectedClient: Client
     @State private var selectedTimeSlot: TimeSlot?
-    @State private var showBanner = false
 
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
                 List(provider.schedule) { slot in
                     HStack {
-                        Text("\(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
+                        VStack(alignment: .leading) {
+                            Text("\(slot.startTime, formatter: DateFormatter.shortDate) \(slot.startTime, formatter: DateFormatter.time) - \(slot.endTime, formatter: DateFormatter.time)")
+                        }
                         if slot.isReserved {
                             Text("Reserved")
                         } else {
@@ -34,16 +35,11 @@ struct ProviderDetailView: View {
                 .navigationTitle(provider.name)
                 .background(
                     NavigationLink(destination: selectedTimeSlot.map {
-                        ReservationConfirmationView(provider: provider, timeSlot: $0, selectedClient: selectedClient, clientVM: clientVM, providerVM: providerVM, showBanner: $showBanner)
+                        ReservationConfirmationView(provider: provider, timeSlot: $0, selectedClient: selectedClient, clientVM: clientVM, providerVM: providerVM)
                     }, isActive: .constant(selectedTimeSlot != nil)) {
                         EmptyView()
                     }
                 )
-                
-                if showBanner {
-                    BannerView(message: "Appointment Successfully Booked!", isVisible: $showBanner)
-                        .padding(.top, 10)
-                }
             }
             .background(Color.clear)
         }

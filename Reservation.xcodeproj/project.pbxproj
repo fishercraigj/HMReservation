@@ -22,7 +22,6 @@
 		118ACA712C40510500428AA8 /* ReservationConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */; };
 		118ACA732C4054BD00428AA8 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA722C4054BD00428AA8 /* Extension+Date.swift */; };
 		118ACA752C4055C000428AA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA742C4055C000428AA8 /* ContentView.swift */; };
-		118ACA772C40595E00428AA8 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA762C40595E00428AA8 /* BannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 		118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationView.swift; sourceTree = "<group>"; };
 		118ACA722C4054BD00428AA8 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		118ACA742C4055C000428AA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		118ACA762C40595E00428AA8 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +153,6 @@
 			children = (
 				118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */,
 				118ACA742C4055C000428AA8 /* ContentView.swift */,
-				118ACA762C40595E00428AA8 /* BannerView.swift */,
 				118ACA692C4048C700428AA8 /* ProviderDetailView.swift */,
 				118ACA6E2C404D6B00428AA8 /* ProviderListView.swift */,
 				118ACA702C40510500428AA8 /* ReservationConfirmationView.swift */,
@@ -317,7 +314,6 @@
 				118ACA682C40448400428AA8 /* ClientViewModel.swift in Sources */,
 				118ACA3B2C4042C400428AA8 /* ClientSelectionView.swift in Sources */,
 				118ACA752C4055C000428AA8 /* ContentView.swift in Sources */,
-				118ACA772C40595E00428AA8 /* BannerView.swift in Sources */,
 				118ACA392C4042C400428AA8 /* ReservationApp.swift in Sources */,
 				118ACA712C40510500428AA8 /* ReservationConfirmationView.swift in Sources */,
 				118ACA6F2C404D6B00428AA8 /* ProviderListView.swift in Sources */,

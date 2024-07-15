@@ -13,7 +13,6 @@ struct ReservationConfirmationView: View {
     var selectedClient: Client
     @ObservedObject var clientVM: ClientViewModel
     @ObservedObject var providerVM: ProviderViewModel
-    @Binding var showBanner: Bool
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -23,7 +22,6 @@ struct ReservationConfirmationView: View {
             Button("Confirm Reservation") {
                 if let reservation = clientVM.clients.first(where: { $0.id == selectedClient.id })?.reservations.first(where: { $0.timeSlotID == timeSlot.id }) {
                     clientVM.confirmReservation(clientID: selectedClient.id, reservationID: reservation.id, providers: &providerVM.providers)
-                    showBanner = true
                     presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
                 }
             }
@@ -49,7 +47,7 @@ struct ReservationConfirmationView_Previews: PreviewProvider {
         let timeSlot = mockProviders[0].schedule[0]
 
         NavigationStack {
-            ReservationConfirmationView(provider: mockProviders[0], timeSlot: timeSlot, selectedClient: client, clientVM: clientVM, providerVM: providerVM, showBanner: .constant(false))
+            ReservationConfirmationView(provider: mockProviders[0], timeSlot: timeSlot, selectedClient: client, clientVM: clientVM, providerVM: providerVM)
                 .environmentObject(clientVM)
         }
     }
