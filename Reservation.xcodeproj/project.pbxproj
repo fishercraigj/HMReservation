@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112F55692C45E9880034C95C /* ProviderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F55682C45E9880034C95C /* ProviderViewModelTests.swift */; };
+		112F556B2C45EF280034C95C /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F556A2C45EF280034C95C /* DataModelTests.swift */; };
+		112F556D2C45EFA40034C95C /* DateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F556C2C45EFA40034C95C /* DateExtensionTests.swift */; };
 		118ACA392C4042C400428AA8 /* ReservationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA382C4042C400428AA8 /* ReservationApp.swift */; };
 		118ACA3B2C4042C400428AA8 /* ClientSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */; };
 		118ACA3D2C4042C600428AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118ACA3C2C4042C600428AA8 /* Assets.xcassets */; };
 		118ACA412C4042C600428AA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118ACA402C4042C600428AA8 /* Preview Assets.xcassets */; };
-		118ACA4B2C4042C700428AA8 /* ReservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA4A2C4042C700428AA8 /* ReservationTests.swift */; };
+		118ACA4B2C4042C700428AA8 /* ClientViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA4A2C4042C700428AA8 /* ClientViewModelTests.swift */; };
 		118ACA552C4042C700428AA8 /* ReservationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA542C4042C700428AA8 /* ReservationUITests.swift */; };
 		118ACA572C4042C700428AA8 /* ReservationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA562C4042C700428AA8 /* ReservationUITestsLaunchTests.swift */; };
 		118ACA642C40435000428AA8 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118ACA632C40435000428AA8 /* DataModels.swift */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		112F55682C45E9880034C95C /* ProviderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderViewModelTests.swift; sourceTree = "<group>"; };
+		112F556A2C45EF280034C95C /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelTests.swift; sourceTree = "<group>"; };
+		112F556C2C45EFA40034C95C /* DateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensionTests.swift; sourceTree = "<group>"; };
 		118ACA352C4042C300428AA8 /* Reservation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reservation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		118ACA382C4042C400428AA8 /* ReservationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationApp.swift; sourceTree = "<group>"; };
 		118ACA3A2C4042C400428AA8 /* ClientSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSelectionView.swift; sourceTree = "<group>"; };
@@ -49,7 +55,7 @@
 		118ACA3E2C4042C600428AA8 /* Reservation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reservation.entitlements; sourceTree = "<group>"; };
 		118ACA402C4042C600428AA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		118ACA462C4042C600428AA8 /* ReservationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReservationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		118ACA4A2C4042C700428AA8 /* ReservationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationTests.swift; sourceTree = "<group>"; };
+		118ACA4A2C4042C700428AA8 /* ClientViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewModelTests.swift; sourceTree = "<group>"; };
 		118ACA502C4042C700428AA8 /* ReservationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReservationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		118ACA542C4042C700428AA8 /* ReservationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUITests.swift; sourceTree = "<group>"; };
 		118ACA562C4042C700428AA8 /* ReservationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -134,7 +140,10 @@
 		118ACA492C4042C600428AA8 /* ReservationTests */ = {
 			isa = PBXGroup;
 			children = (
-				118ACA4A2C4042C700428AA8 /* ReservationTests.swift */,
+				118ACA4A2C4042C700428AA8 /* ClientViewModelTests.swift */,
+				112F55682C45E9880034C95C /* ProviderViewModelTests.swift */,
+				112F556A2C45EF280034C95C /* DataModelTests.swift */,
+				112F556C2C45EFA40034C95C /* DateExtensionTests.swift */,
 			);
 			path = ReservationTests;
 			sourceTree = "<group>";
@@ -324,7 +333,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				118ACA4B2C4042C700428AA8 /* ReservationTests.swift in Sources */,
+				112F556B2C45EF280034C95C /* DataModelTests.swift in Sources */,
+				112F556D2C45EFA40034C95C /* DateExtensionTests.swift in Sources */,
+				118ACA4B2C4042C700428AA8 /* ClientViewModelTests.swift in Sources */,
+				112F55692C45E9880034C95C /* ProviderViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
